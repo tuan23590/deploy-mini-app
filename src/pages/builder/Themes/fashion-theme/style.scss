@@ -1,0 +1,18 @@
+.fashion-theme {
+  background-color: var(--section) !important;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .content {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    flex: 1;
+  }
+}
+.category-tab,
+.category-detail-tab,
+.profile-tab,
+.categories-tab {
+  background-color: white !important;
+}

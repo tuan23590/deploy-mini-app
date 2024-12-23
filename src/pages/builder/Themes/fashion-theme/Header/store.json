@@ -1,0 +1,9 @@
+{
+  "type": "header1",
+  "logo": "/fashion-theme/header-logo.svg",
+  "displayLogo": true,
+  "title": "Fashion Theme",
+  "header1": {
+  },
+  "header2": {}
+}
