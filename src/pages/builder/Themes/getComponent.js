@@ -23,14 +23,15 @@ async function getComponent(initData) {
     const listComponent = fashionTheme
       .filter((component) => postion.includes(component.name))
       .sort((a, b) => postion.indexOf(a.name) - postion.indexOf(b.name));
-
+      
     //Lấy tất cả các module (view/edit) theo theme
     const modules = import.meta.glob("./fashion-theme/**/*.{jsx,js}");
+
     const componentsByTheme = {};
-    for (const path in modules) {
-      componentsByTheme[path.replace("./", "@/pages/builder/Themes/")] =
-        lazyWithPreload(() => modules[path]());
-    }
+    listComponent.forEach((component) => {
+      const view = component.view.replace("@/pages/builder/Themes/", "./");
+        componentsByTheme[component.view] = lazyWithPreload(() => modules[view]());
+    });
 
     // Import style của theme và chờ hoàn thành
     const themeStyle = import.meta.glob("./fashion-theme/**/style.scss");
