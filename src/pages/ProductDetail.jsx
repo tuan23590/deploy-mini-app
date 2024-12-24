@@ -2,8 +2,10 @@ import React, { Suspense, useEffect, useState } from "react";
 import data from "@/data.json";
 import getComponent from "@/pages/builder/Themes/getComponent";
 
-export default function ProductDetail() {
-  const pageSelected = "product-tab";
+export default function ProductDetail({
+  pageSelected = "product-tab",
+  pageTitle = "Chi tiết sản phẩm",
+}) {
   const [themeJSON, setThemeJSON] = useState(null);
   const [componentPageManager, setComponentPageManager] = useState([]);
   const homeData = data[pageSelected];
@@ -22,7 +24,7 @@ export default function ProductDetail() {
 
   useEffect(() => {
     if (themeJSON && pageSelected) {
-      setComponentPageManager(themeJSON.pages[pageSelected]);
+      setComponentPageManager(themeJSON);
     }
   }, [themeJSON, pageSelected]);
 
@@ -36,7 +38,6 @@ export default function ProductDetail() {
           .map((componentPage) => {
             const ComponentView = componentPage.view;
             const showBack = pageSelected === "home-tab" ? false : true;
-            const pageTitle = themeJSON.description[pageSelected];
             return (
               <Suspense
                 fallback={<>Loading...</>}
