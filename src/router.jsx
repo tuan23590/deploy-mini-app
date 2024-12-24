@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     element: <Render pageSelected={"categories-tab"} pageTitle={"Danh mục"} />,
   },
   {
-    path: "/categories/:id",
+    path: "/category/:id",
     element: <Render pageSelected={"category-detail-tab"} pageTitle={"Chi tiết danh mục"} />,
   },
   {

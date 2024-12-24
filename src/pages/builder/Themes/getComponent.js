@@ -9,15 +9,15 @@ const lazyWithPreload = (importFunc) => {
   return Component;
 };
 
-async function getComponent(homeData) {
+async function getComponent(initData) {
   try {
-    // Tạo cấu trúc dữ liệu ban đầu từ `homeData` có dạng [{name: {data},{name: {data}]
-    const dataComponent = homeData.reduce((acc, component) => {
+    // Tạo cấu trúc dữ liệu ban đầu từ `initData` có dạng [{name: {data},{name: {data}]
+    const dataComponent = initData.reduce((acc, component) => {
       acc[component.name] = component.data;
       return acc;
     }, {});
 
-    const postion = homeData.map((component) => component.name);
+    const postion = initData.map((component) => component.name);
 
     // Lọc và sắp xếp các component và theo vị trí của nó trong theme
     const listComponent = fashionTheme
