@@ -5,7 +5,7 @@ export default function ProductItem(props) {
   return (
     <TransitionLink
       className="flex flex-col cursor-pointer group"
-      // to={`/product/${props.product.id}`}
+      to={`/product/${props.product.id}`}
     >
       <img
         className="w-full aspect-square object-cover rounded-t-lg"

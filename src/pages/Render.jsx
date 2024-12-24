@@ -2,31 +2,31 @@ import React, { Suspense, useEffect, useState } from "react";
 import data from "@/data.json";
 import getComponent from "@/pages/builder/Themes/getComponent";
 
-export default function CategoryDetail() {
-  const pageSelected = "category-detail-tab";
-  const [themeJSON, setThemeJSON] = useState(null);
+export default function ({
+  pageSelected = "home-tab",
+  pageTitle = "Trang chủ",
+}) {
+  if (!data[pageSelected]) {
+    return <div>Không tìm thấy trang</div>;
+  }
   const [componentPageManager, setComponentPageManager] = useState([]);
-  const homeData = data[pageSelected];
   useEffect(() => {
     const fetchTheme = async () => {
       try {
-        const themeData = await getComponent(homeData);
-        setThemeJSON(themeData); // Chỉ setState sau khi có dữ liệu
+        // Lấy dữ liệu theme
+        const themeData = await getComponent(data[pageSelected]);
+
+        // Cập nhật danh sách component nếu dữ liệu hợp lệ
+        if (themeData) {
+          setComponentPageManager(themeData);
+        }
       } catch (error) {
         console.error("Failed to load theme:", error);
       }
     };
 
     fetchTheme();
-  }, []);
-
-  useEffect(() => {
-    if (themeJSON && pageSelected) {
-      setComponentPageManager(themeJSON.pages[pageSelected]);
-    }
-  }, [themeJSON, pageSelected]);
-
-  if (!themeJSON) return <>Loading...</>;
+  }, [pageSelected]);
 
   return (
     <div>
@@ -36,18 +36,13 @@ export default function CategoryDetail() {
           .map((componentPage) => {
             const ComponentView = componentPage.view;
             const showBack = pageSelected === "home-tab" ? false : true;
-            const pageTitle = themeJSON.description[pageSelected];
             return (
-              <Suspense
-                fallback={<>Loading...</>}
+              <ComponentView
                 key={`component-view-${componentPage.id}`}
-              >
-                <ComponentView
-                  showBack={showBack}
-                  pageTitle={pageTitle}
-                  store={componentPage.store}
-                />
-              </Suspense>
+                showBack={showBack}
+                pageTitle={pageTitle}
+                store={componentPage.store}
+              />
             );
           })}
         <div className="content">
@@ -77,15 +72,11 @@ export default function CategoryDetail() {
           .map((componentPage) => {
             const ComponentView = componentPage.view;
             return (
-              <Suspense
-                fallback={<>Loading...</>}
+              <ComponentView
                 key={`component-view-${componentPage.id}`}
-              >
-                <ComponentView
-                  store={componentPage.store}
-                  pageSelected={pageSelected}
-                />
-              </Suspense>
+                store={componentPage.store}
+                pageSelected={pageSelected}
+              />
             );
           })}
       </div>

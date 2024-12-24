@@ -16,7 +16,7 @@ function CategoryListView({ store: { useStore } }) {
           <TransitionLink
             key={category.id}
             className="flex flex-col items-center space-y-2 flex-none basis-[70px] overflow-hidden cursor-pointer"
-            // to={`/category/${category.id}`}
+            to={`/category/${category.id}`}
           >
             <img
               src={category.image}

@@ -9,7 +9,7 @@ export default function Section(props) {
         {props.viewMoreTo && (
           <TransitionLink
             className="text-sm font-medium text-primary flex items-center space-x-1 p-2 cursor-pointer flex-none"
-            // to={props.viewMoreTo}
+            to={props.viewMoreTo}
           >
             <span>Xem thêm</span>
             <ChevronRight />

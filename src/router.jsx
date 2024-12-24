@@ -1,34 +1,29 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "./pages/Home";
-import Categories from "./pages/Categories";
-import CategoryDetail from "./pages/CategoryDetail";
-import Cart from "./pages/Cart";
-import ProductDetail from "./pages/ProductDetail";
-import Profile from "./pages/Profile";
+import Render from "@/pages/Render";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Render pageSelected={"home-tab"} pageTitle={"Trang chủ"} />,
   },
   {
     path: "/categories",
-    element: <Categories />,
+    element: <Render pageSelected={"categories-tab"} pageTitle={"Danh mục"} />,
   },
   {
     path: "/categories/:id",
-    element: <CategoryDetail />,
+    element: <Render pageSelected={"category-detail-tab"} pageTitle={"Chi tiết danh mục"} />,
   },
   {
     path: "/cart",
-    element: <Cart />,
+    element: <Render pageSelected={"cart-tab"} pageTitle={"Giỏ hàng"} />,
   },
   {
     path: "/product/:id",
-    element: <ProductDetail />,
+    element: <Render pageSelected={"product-detail-tab"} pageTitle={"Chi tiết sản phẩm"} />,
   },
   {
     path: "/profile",
-    element: <Profile />,
+    element: <Render pageSelected={"profile-tab"} pageTitle={"Hồ sơ"} />,
   }
 ],
 {basename: window.APP_ID === undefined ? "/" : `/zapps/${window.APP_ID}`}
