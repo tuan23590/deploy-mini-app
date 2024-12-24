@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import data from "@/data.json";
 import getComponent from "@/pages/builder/Themes/getComponent";
+import { ScrollRestoration } from "@/components/scroll-restoration";
 
 export default function ({
   pageSelected = "home-tab",
@@ -24,7 +25,6 @@ export default function ({
         console.error("Failed to load theme:", error);
       }
     };
-
     fetchTheme();
   }, [pageSelected]);
 
@@ -37,12 +37,17 @@ export default function ({
             const ComponentView = componentPage.view;
             const showBack = pageSelected === "home-tab" ? false : true;
             return (
-              <ComponentView
-                key={`component-view-${componentPage.id}`}
-                showBack={showBack}
-                pageTitle={pageTitle}
-                store={componentPage.store}
-              />
+              <Suspense
+                  fallback={<>Loading...</>}
+                  key={`component-view-${componentPage.id}`}
+                >
+                  <ComponentView
+                    key={`component-view-${componentPage.id}`}
+                    showBack={showBack}
+                    pageTitle={pageTitle}
+                    store={componentPage.store}
+                  />
+                </Suspense>
             );
           })}
         <div className="content">
@@ -72,14 +77,20 @@ export default function ({
           .map((componentPage) => {
             const ComponentView = componentPage.view;
             return (
-              <ComponentView
-                key={`component-view-${componentPage.id}`}
-                store={componentPage.store}
-                pageSelected={pageSelected}
-              />
+              <Suspense
+                  fallback={<>Loading...</>}
+                  key={`component-view-${componentPage.id}`}
+                >
+                  <ComponentView
+                    key={`component-view-${componentPage.id}`}
+                    store={componentPage.store}
+                    pageSelected={pageSelected}
+                  />
+                </Suspense>
             );
           })}
       </div>
+      <ScrollRestoration />
     </div>
   );
 }
