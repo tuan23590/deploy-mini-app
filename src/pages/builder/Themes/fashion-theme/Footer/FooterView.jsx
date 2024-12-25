@@ -43,7 +43,7 @@ const NAV_ITEMS = [
   },
 ];
 
-function FooterView({pageSelected, store: { useStore } }) {
+function FooterView({store: { useStore } }) {
   const [storeLocal] = useStore();
 
   return (
@@ -54,7 +54,6 @@ function FooterView({pageSelected, store: { useStore } }) {
       itemLength={NAV_ITEMS.length}
     >
       {NAV_ITEMS.map((item) => {
-        const isActive = pageSelected === item.name;
         return (
           <TransitionLink
             to={item.path}

@@ -77,7 +77,6 @@ export default function ({
                 >
                   <ComponentView
                     store={componentPage.store}
-                    pageSelected={pageSelected}
                   />
                 </Suspense>
               );
@@ -92,7 +91,6 @@ export default function ({
           >
             <footerComponent.view
               store={footerComponent.store}
-              pageSelected={pageSelected}
             />
           </Suspense>
         )}
