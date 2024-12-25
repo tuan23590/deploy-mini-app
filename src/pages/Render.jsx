@@ -7,10 +7,10 @@ export default function ({
   pageSelected = "home-tab",
   pageTitle = "Trang chủ",
 }) {
-  if (!data[pageSelected]) {
-    return <div>Không tìm thấy trang</div>;
-  }
   const [componentPageManager, setComponentPageManager] = useState([]);
+  const [headerComponent, setHeaderComponent] = useState(null);
+  const [footerComponent, setFooterComponent] = useState(null);
+
   useEffect(() => {
     const fetchTheme = async () => {
       try {
@@ -20,6 +20,21 @@ export default function ({
         // Cập nhật danh sách component nếu dữ liệu hợp lệ
         if (themeData) {
           setComponentPageManager(themeData);
+
+          // Lưu Header và Footer nếu chưa có
+          if (!headerComponent) {
+            const header = themeData.find(
+              (componentPage) => componentPage.name === "header"
+            );
+            if (header) setHeaderComponent(header);
+          }
+
+          if (!footerComponent) {
+            const footer = themeData.find(
+              (componentPage) => componentPage.name === "footer"
+            );
+            if (footer) setFooterComponent(footer);
+          }
         }
       } catch (error) {
         console.error("Failed to load theme:", error);
@@ -31,34 +46,30 @@ export default function ({
   return (
     <div>
       <div className={`containerMainArea fashion-theme ${pageSelected}`}>
-        {componentPageManager
-          .filter((componentPage) => componentPage.name === "header")
-          .map((componentPage) => {
-            const ComponentView = componentPage.view;
-            const showBack = pageSelected === "home-tab" ? false : true;
-            return (
-              <Suspense
-                  fallback={<>Loading...</>}
-                  key={`component-view-${componentPage.id}`}
-                >
-                  <ComponentView
-                    key={`component-view-${componentPage.id}`}
-                    showBack={showBack}
-                    pageTitle={pageTitle}
-                    store={componentPage.store}
-                  />
-                </Suspense>
-            );
-          })}
+        {/* Header */}
+        {headerComponent && (
+          <Suspense
+            fallback={<>Loading...</>}
+            key={`component-view-${headerComponent.id}`}
+          >
+            <headerComponent.view
+              showBack={pageSelected === "home-tab" ? false : true}
+              pageTitle={pageTitle}
+              store={headerComponent.store}
+            />
+          </Suspense>
+        )}
+
+        {/* Content */}
         <div className="content">
-          {componentPageManager.map((componentPage) => {
-            const ComponentView = componentPage.view;
-            if (
-              componentPage.name === "header" ||
-              componentPage.name === "footer"
+          {componentPageManager
+            .filter(
+              (componentPage) =>
+                componentPage.name !== "header" &&
+                componentPage.name !== "footer"
             )
-              return null;
-            else
+            .map((componentPage) => {
+              const ComponentView = componentPage.view;
               return (
                 <Suspense
                   fallback={<>Loading...</>}
@@ -70,25 +81,21 @@ export default function ({
                   />
                 </Suspense>
               );
-          })}
+            })}
         </div>
-        {componentPageManager
-          .filter((componentPage) => componentPage.name === "footer")
-          .map((componentPage) => {
-            const ComponentView = componentPage.view;
-            return (
-              <Suspense
-                  fallback={<>Loading...</>}
-                  key={`component-view-${componentPage.id}`}
-                >
-                  <ComponentView
-                    key={`component-view-${componentPage.id}`}
-                    store={componentPage.store}
-                    pageSelected={pageSelected}
-                  />
-                </Suspense>
-            );
-          })}
+
+        {/* Footer */}
+        {footerComponent && (
+          <Suspense
+            fallback={<>Loading...</>}
+            key={`component-view-${footerComponent.id}`}
+          >
+            <footerComponent.view
+              store={footerComponent.store}
+              pageSelected={pageSelected}
+            />
+          </Suspense>
+        )}
       </div>
       <ScrollRestoration />
     </div>
