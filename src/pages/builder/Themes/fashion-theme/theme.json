@@ -1,39 +1,21 @@
 [
   {
-    "name": "button",
-    "view": "@/pages/builder/Themes/fashion-theme/Button/ButtonView.jsx",
-    "edit": "@/pages/builder/Themes/fashion-theme/Button/ButtonEdit.jsx",
-    "store": "@/pages/builder/Themes/fashion-theme/Button/store.json"
+    "name": "category-tabs",
+    "view": "@/pages/builder/Themes/fashion-theme/CategoryTabs/CategoryTabsView.jsx",
+    "edit": "@/pages/builder/Themes/fashion-theme/CategoryTabs/CategoryTabsEdit.jsx",
+    "store": "@/pages/builder/Themes/fashion-theme/CategoryTabs/store.json"
   },
   {
-    "name": "header",
-    "view": "@/pages/builder/Themes/fashion-theme/Header/HeaderView.jsx",
-    "edit": "@/pages/builder/Themes/fashion-theme/Header/HeaderEdit.jsx",
-    "store": "@/pages/builder/Themes/fashion-theme/Header/store.json"
+    "name": "category-list-full",
+    "view": "@/pages/builder/Themes/fashion-theme/CategoryListFull/CategoryListFullView.jsx",
+    "edit": "@/pages/builder/Themes/fashion-theme/CategoryListFull/CategoryListFullEdit.jsx",
+    "store": "@/pages/builder/Themes/fashion-theme/CategoryListFull/store.json"
   },
   {
-    "name": "footer",
-    "view": "@/pages/builder/Themes/fashion-theme/Footer/FooterView.jsx",
-    "edit": "@/pages/builder/Themes/fashion-theme/Footer/FooterEdit.jsx",
-    "store": "@/pages/builder/Themes/fashion-theme/Footer/store.json"
-  },
-  {
-    "name": "product-filter",
-    "view": "@/pages/builder/Themes/fashion-theme/ProductFilter/ProductFilterView.jsx",
-    "edit": "@/pages/builder/Themes/fashion-theme/ProductFilter/ProductFilterEdit.jsx",
-    "store": "@/pages/builder/Themes/fashion-theme/ProductFilter/store.json"
-  },
-  {
-    "name": "product-list",
-    "view": "@/pages/builder/Themes/fashion-theme/ProductList/ProductListView.jsx",
-    "edit": "@/pages/builder/Themes/fashion-theme/ProductList/ProductListEdit.jsx",
-    "store": "@/pages/builder/Themes/fashion-theme/ProductList/store.json"
-  },
-  {
-    "name": "product",
-    "view": "@/pages/builder/Themes/fashion-theme/Product/ProductView.jsx",
-    "edit": "@/pages/builder/Themes/fashion-theme/Product/ProductEdit.jsx",
-    "store": "@/pages/builder/Themes/fashion-theme/Product/store.json"
+    "name": "cart",
+    "view": "@/pages/builder/Themes/fashion-theme/Cart/CartView.jsx",
+    "edit": "@/pages/builder/Themes/fashion-theme/Cart/CartEdit.jsx",
+    "store": "@/pages/builder/Themes/fashion-theme/Cart/store.json"
   },
   {
     "name": "points",
@@ -48,16 +30,40 @@
     "store": "@/pages/builder/Themes/fashion-theme/ProfileActions/store.json"
   },
   {
-    "name": "cart",
-    "view": "@/pages/builder/Themes/fashion-theme/Cart/CartView.jsx",
-    "edit": "@/pages/builder/Themes/fashion-theme/Cart/CartEdit.jsx",
-    "store": "@/pages/builder/Themes/fashion-theme/Cart/store.json"
+    "name": "product",
+    "view": "@/pages/builder/Themes/fashion-theme/Product/ProductView.jsx",
+    "edit": "@/pages/builder/Themes/fashion-theme/Product/ProductEdit.jsx",
+    "store": "@/pages/builder/Themes/fashion-theme/Product/store.json"
   },
   {
-    "name": "category-list-full",
-    "view": "@/pages/builder/Themes/fashion-theme/CategoryListFull/CategoryListFullView.jsx",
-    "edit": "@/pages/builder/Themes/fashion-theme/CategoryListFull/CategoryListFullEdit.jsx",
-    "store": "@/pages/builder/Themes/fashion-theme/CategoryListFull/store.json"
+    "name": "product-filter",
+    "view": "@/pages/builder/Themes/fashion-theme/ProductFilter/ProductFilterView.jsx",
+    "edit": "@/pages/builder/Themes/fashion-theme/ProductFilter/ProductFilterEdit.jsx",
+    "store": "@/pages/builder/Themes/fashion-theme/ProductFilter/store.json"
+  },
+  {
+    "name": "button",
+    "view": "@/pages/builder/Themes/fashion-theme/Button/ButtonView.jsx",
+    "edit": "@/pages/builder/Themes/fashion-theme/Button/ButtonEdit.jsx",
+    "store": "@/pages/builder/Themes/fashion-theme/Button/store.json"
+  },
+  {
+    "name": "product-list",
+    "view": "@/pages/builder/Themes/fashion-theme/ProductList/ProductListView.jsx",
+    "edit": "@/pages/builder/Themes/fashion-theme/ProductList/ProductListEdit.jsx",
+    "store": "@/pages/builder/Themes/fashion-theme/ProductList/store.json"
+  },
+  {
+    "name": "header",
+    "view": "@/pages/builder/Themes/fashion-theme/Header/HeaderView.jsx",
+    "edit": "@/pages/builder/Themes/fashion-theme/Header/HeaderEdit.jsx",
+    "store": "@/pages/builder/Themes/fashion-theme/Header/store.json"
+  },
+  {
+    "name": "footer",
+    "view": "@/pages/builder/Themes/fashion-theme/Footer/FooterView.jsx",
+    "edit": "@/pages/builder/Themes/fashion-theme/Footer/FooterEdit.jsx",
+    "store": "@/pages/builder/Themes/fashion-theme/Footer/store.json"
   },
   {
     "name": "search-bar",
@@ -70,12 +76,6 @@
     "view": "@/pages/builder/Themes/fashion-theme/Banners/BannersView.jsx",
     "edit": "@/pages/builder/Themes/fashion-theme/Banners/BannersEdit.jsx",
     "store": "@/pages/builder/Themes/fashion-theme/Banners/store.json"
-  },
-  {
-    "name": "category-tabs",
-    "view": "@/pages/builder/Themes/fashion-theme/CategoryTabs/CategoryTabsView.jsx",
-    "edit": "@/pages/builder/Themes/fashion-theme/CategoryTabs/CategoryTabsEdit.jsx",
-    "store": "@/pages/builder/Themes/fashion-theme/CategoryTabs/store.json"
   },
   {
     "name": "category-list",

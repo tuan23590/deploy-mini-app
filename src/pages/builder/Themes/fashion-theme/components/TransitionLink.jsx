@@ -6,5 +6,6 @@ import { NavLink } from "react-router-dom";
  * @returns {JSX.Element} - The wrapped NavLink component with view transition enabled
  */
 export default function TransitionLink(props) {
-  return <NavLink {...props} unstable_viewTransition />;
+  // return <NavLink {...props} unstable_viewTransition />;
+  return <NavLink {...props} />;
 }

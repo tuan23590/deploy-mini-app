@@ -3,11 +3,13 @@ import { CustomerSupportIcon } from "@/pages/builder/Themes/fashion-theme/compon
 import { formatPrice } from "@/pages/builder/Themes/fashion-theme/utils/format";
 import { produce } from "immer";
 
-export default function CartSummary({useStore}) {
-  const [totalItems,_] = useStore.totalItems();
-  const [totalAmount,__] = useStore.totalAmount();
-  const [cart, setCart] = useStore.cart();
-  const [selectedItemIds, setSelectedItemIds] = useStore.selectedItemIds();
+export default function CartSummary({
+  totalItems,
+  totalAmount,
+  selectedItemIds,
+  setCart,
+  setSelectedItemIds,
+}) {
   const contact = () => {
     alert("This feature is not implemented yet");
     };

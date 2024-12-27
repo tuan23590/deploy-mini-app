@@ -1,10 +1,19 @@
 import Section from "@/pages/builder/Themes/fashion-theme/components/Section";
 import TransitionLink from "@/pages/builder/Themes/fashion-theme/components/TransitionLink";
+import { getCategories } from "@/pages/builder/Themes/fashion-theme/utils/api";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 function CategoryListView({ store: { useStore } }) {
-  const [storeLocal, setStoreLocal] = useStore();
-  const { categories } = storeLocal;
+  const [categories, setCategories] = useState(null);
+  
+  useEffect(() => {
+    const fetchCategoriesAndTabs = async () => {
+      const categoriesData = await getCategories();
+      setCategories(categoriesData);
+    };
+    fetchCategoriesAndTabs();
+  }, []);
 
   if (!categories) return <div>Loading...</div>;
 

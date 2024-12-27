@@ -1,4 +1,3 @@
-
 import { SearchIcon } from "@/pages/builder/Themes/fashion-theme/components/Vectors";
 import { forwardRef } from "react";
 

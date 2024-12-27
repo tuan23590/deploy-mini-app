@@ -43,7 +43,7 @@ const NAV_ITEMS = [
   },
 ];
 
-function FooterView({pageSelected, store: { useStore } }) {
+function FooterView({ store: { useStore } }) {
   const [storeLocal] = useStore();
 
   return (
@@ -54,23 +54,26 @@ function FooterView({pageSelected, store: { useStore } }) {
       itemLength={NAV_ITEMS.length}
     >
       {NAV_ITEMS.map((item) => {
-        const isActive = pageSelected === item.name;
         return (
           <TransitionLink
             to={item.path}
             key={item.path}
             className="flex flex-col items-center space-y-0.5 p-1 pb-0.5 cursor-pointer active:scale-105"
           >
-           {({ isActive }) => (
-                <>
-                  <div className="w-6 h-6 flex justify-center items-center">
-                    <item.icon active={isActive} />
-                  </div>
-                  <div className={`text-2xs ${isActive ? "text-primary" : ""}`}>
-                    {item.displayName}
-                  </div>
-                </>
-              )}
+            {({ isActive }) => (
+              <>
+                <div className="w-6 h-6 flex justify-center items-center">
+                  <item.icon 
+                  active={isActive} 
+                  />
+                </div>
+                <div 
+                className={`text-2xs ${isActive ? "text-primary" : ""}`}
+                >
+                  {item.displayName}
+                </div>
+              </>
+            )}
           </TransitionLink>
         );
       })}
@@ -78,6 +81,19 @@ function FooterView({pageSelected, store: { useStore } }) {
   </div>
   );
 }
+
+const FooterViewRender = styled.div`
+  display: flex;
+  justify-content: space-around;
+
+  .footer__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+`;
 
 const ListFooter = styled.div`
   grid-template-columns: ${(props) => `repeat(${props.itemLength}, 1fr)`};

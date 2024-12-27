@@ -4,23 +4,38 @@ import HorizontalDivider from "@/pages/builder/Themes/fashion-theme/components/H
 import CartList from "@/pages/builder/Themes/fashion-theme/Cart/CartList";
 import ApplyVoucher from "@/pages/builder/Themes/fashion-theme/Cart/ApplyVoucher";
 import CartSummary from "@/pages/builder/Themes/fashion-theme/Cart/CartSummary";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getCart } from "@/pages/builder/Themes/fashion-theme/utils/api";
 function CartView({ store: { useStore } }) {
-  const [storeLocal] = useStore();
-  const { cart } = storeLocal;
-  const [selectedItemIds, setSelectedItemIds] = useStore.selectedItemIds();
-  const [totalItems, setTotalItems] = useStore.totalItems();
-  const [totalAmount, setTotalAmount] = useStore.totalAmount();
+  const [cart, setCart] = useState([]);
+  const [selectedItemIds, setSelectedItemIds] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+  
 
   useEffect(() => {
-    const listSelectedItems = cart.filter((item) => selectedItemIds.includes(item.id));
-    const totalItems = listSelectedItems.reduce((acc, item) => acc + item.quantity, 0);
-    const totalAmount = listSelectedItems.reduce((acc, item) => acc + item.quantity * item.product.price, 0);
+    const fetchCart = async () => {
+      const data = await getCart();
+      setCart(data);
+    };
+    fetchCart();
+  }, []);
+
+  useEffect(() => {
+    const listSelectedItems = cart.filter((item) =>
+      selectedItemIds.includes(item.id)
+    );
+    const totalItems = listSelectedItems.reduce(
+      (acc, item) => acc + item.quantity,
+      0
+    );
+    const totalAmount = listSelectedItems.reduce(
+      (acc, item) => acc + item.quantity * item.product.price,
+      0
+    );
     setTotalItems(totalItems);
     setTotalAmount(totalAmount);
-  }, [selectedItemIds,cart]);
-
-
+  }, [selectedItemIds, cart]);
 
   if (!cart?.length) {
     return (
@@ -38,13 +53,29 @@ function CartView({ store: { useStore } }) {
 
   return (
     <div className="bg-background w-full h-full flex flex-col gap-1">
-      <SelectAll useStore={useStore} />
+      <SelectAll
+        cart={cart}
+        setCart={setCart}
+        selectedItemIds={selectedItemIds}
+        setSelectedItemIds={setSelectedItemIds}
+      />
       <HorizontalDivider />
-      <CartList cart={cart} useStore={useStore} />
+      <CartList
+        cart={cart}
+        setCart={setCart}
+        selectedItemIds={selectedItemIds}
+        setSelectedItemIds={setSelectedItemIds}
+      />
       <HorizontalDivider />
       <ApplyVoucher />
       <HorizontalDivider />
-      <CartSummary useStore={useStore}/>
+      <CartSummary
+        totalItems={totalItems}
+        totalAmount={totalAmount}
+        selectedItemIds={selectedItemIds}
+        setCart={setCart}
+        setSelectedItemIds={setSelectedItemIds}
+      />
     </div>
   );
 }

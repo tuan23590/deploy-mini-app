@@ -1,10 +1,11 @@
+import { TextField } from '@shopify/polaris';
 
 function ProductEdit({ store: { useStore } }) {
   const [storeLocal, setStoreLocal] = useStore();
 
   return (
     <div>
-      <input
+      <TextField
         label="Sửa nút"
         value={storeLocal.btn}
         onChange={(val) => setStoreLocal((s) => ({ ...s, btn: val }))}

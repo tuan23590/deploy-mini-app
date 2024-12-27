@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import data from "@/data.json";
-import getComponent from "@/pages/builder/Themes/getComponent";
 import { ScrollRestoration } from "@/components/scroll-restoration";
+import { getComponent } from "@/pages/builder/Themes/getComponent";
 
 export default function ({
   pageSelected = "home-tab",
@@ -15,7 +15,11 @@ export default function ({
     const fetchTheme = async () => {
       try {
         // Lấy dữ liệu theme
-        const themeData = await getComponent(data[pageSelected]);
+        const headerAndFooterComponent = !headerComponent && !footerComponent ? Object.values(data["layout"]): []
+        const themeData = await getComponent([
+          ...data["pages"].find((page) => page.name === pageSelected).data,
+          ...headerAndFooterComponent,
+        ]);
 
         // Cập nhật danh sách component nếu dữ liệu hợp lệ
         if (themeData) {

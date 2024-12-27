@@ -1,10 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ProductItem from "@/pages/builder/Themes/fashion-theme/components/ProductItem";
+import { getProducts } from "@/pages/builder/Themes/fashion-theme/utils/api";
 
 function ProductListView({ store: { useStore } }) {
-  const [products, setProducts] = useStore.products();
+  const [products, setProducts] = useState([]);
 
-  if (!products) return <div>Loading...</div>;
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productsData =  await getProducts();
+      setProducts(productsData);
+    }
+    fetchProducts();
+  }, []);
+
+  if (products.length === 0) { return <div>Loading...</div> }
 
   return (
     <div

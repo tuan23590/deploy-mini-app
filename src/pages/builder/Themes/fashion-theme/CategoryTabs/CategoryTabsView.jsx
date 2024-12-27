@@ -1,11 +1,18 @@
 import Tabs from "@/pages/builder/Themes/fashion-theme/components/Tabs";
-import { produce } from "immer";
-import { useEffect } from "react";
+import { getTabsTemplate } from "@/pages/builder/Themes/fashion-theme/utils/api";
+import { useEffect, useState } from "react";
 
 function CategoryTabsView({ store: { useStore } }) {
-  const [storeLocal, setStoreLocal] = useStore();
-  const [selectedIndex, setSelectedIndex] = useStore.selectedIndex();
-  const { tabs } = storeLocal;
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [tabs, setTabs] = useState([]);
+  
+  useEffect(() => {
+    const fetchCategoriesAndTabs = async () => {
+      const tabsData = await getTabsTemplate();
+      setTabs(tabsData);
+    };
+    fetchCategoriesAndTabs();
+  }, []);
 
   if (!tabs) return <div>Loading...</div>;
 

@@ -1,8 +1,20 @@
 import Carousel from "@/pages/builder/Themes/fashion-theme/components/Carousel";
+import { useEffect, useState } from "react";
+import { getBanners } from "@/pages/builder/Themes/fashion-theme/utils/api";
 
 function SearchBarAndBannersView({ store: { useStore } }) {
-  const [banners, setBanners] = useStore.banners();
+  const [banners, setBanners] = useState(null);
+
+  useEffect(() => {
+    const fetchBanners = async () => {
+      const bannerData = await getBanners();
+      setBanners(bannerData);
+    };
+    fetchBanners();
+  }, []);
+
   if (!banners) return <div>Loading...</div>;
+
   return (
     <div className="bg-background">
       <Carousel

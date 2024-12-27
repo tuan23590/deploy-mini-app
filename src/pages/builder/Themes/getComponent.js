@@ -9,7 +9,7 @@ const lazyWithPreload = (importFunc) => {
   return Component;
 };
 
-async function getComponent(initData) {
+export async function getComponent(initData) {
   try {
     // Tạo cấu trúc dữ liệu ban đầu từ `initData` có dạng [{name: {data},{name: {data}]
     const dataComponent = initData.reduce((acc, component) => {
@@ -34,7 +34,7 @@ async function getComponent(initData) {
     });
 
     // Import style của theme và chờ hoàn thành
-    const themeStyle = import.meta.glob("./fashion-theme/**/style.scss");
+    const themeStyle = import.meta.glob("./fashion-theme/*.scss");
     await Promise.all(Object.values(themeStyle).map((style) => style()));
 
     // Tạo danh sách đầy đủ với view, edit, id, và store
@@ -58,5 +58,3 @@ async function getComponent(initData) {
     throw error; // Quăng lỗi nếu có vấn đề
   }
 }
-
-export default getComponent;

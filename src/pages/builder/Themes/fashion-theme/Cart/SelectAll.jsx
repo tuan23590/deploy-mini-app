@@ -1,9 +1,12 @@
 import Checkbox from "@/pages/builder/Themes/fashion-theme/components/Checkbox";
 import { RemoveIcon } from "@/pages/builder/Themes/fashion-theme/components/Vectors";
 
-export default function SelectAll({useStore}) {
-  const [cart, setCart] = useStore.cart();
-  const [selectedItemIds, setSelectedItemIds] = useStore.selectedItemIds();
+export default function SelectAll({
+  cart,
+  selectedItemIds,
+  setSelectedItemIds,
+  setCart,
+}) {
   const checkedAll =
     selectedItemIds.length > 0 &&
     !cart.some((item) => !selectedItemIds.includes(item.id));
@@ -18,6 +21,8 @@ export default function SelectAll({useStore}) {
     setCart(cart.filter((item) => !selectedItemIds.includes(item.id)));
     setSelectedItemIds([]);
   };
+
+
   return (
     <div className="px-4 py-3 flex items-center space-x-4">
       <Checkbox

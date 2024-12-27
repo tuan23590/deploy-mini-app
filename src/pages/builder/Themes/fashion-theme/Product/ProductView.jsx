@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { getProductById, getProducts } from "@/pages/builder/Themes/fashion-theme/utils/api";
 import { formatPrice } from "@/pages/builder/Themes/fashion-theme/utils/format";
 import ShareButton from "@/pages/builder/Themes/fashion-theme/components/ShareButton";
 import VariantPicker from "@/pages/builder/Themes/fashion-theme/Product/VariantPicker";
@@ -8,19 +9,31 @@ import Button from "@/pages/builder/Themes/fashion-theme/components/Button";
 import RelatedProducts from "@/pages/builder/Themes/fashion-theme/Product/RelatedProducts";
 import Collapse from "@/pages/builder/Themes/fashion-theme/components/Collapse";
 
-function ProductView({ id,store: { useStore } }) {
+function ProductView({ store: { useStore } }) {
   const [storeLocal] = useStore();
 
-  const [selectedColor, setSelectedColor] = useState();
-  const [selectedSize, setSelectedSize] = useState();
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
 
-  const [relatedProducts, setRelatedProducts] = useStore.relatedProducts();
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
-  const [product, setProduct] = useStore.product();
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    setSelectedColor(product.colors?.[0]);
-    setSelectedSize(product.sizes?.[0]);
+    const fetchProduct = async () => {
+      const productById = await getProductById(1);
+      const products = await getProducts()
+      setProduct(productById);
+      setRelatedProducts(
+        products.filter((p) => p.id !== productById.id)
+      );
+    };
+    fetchProduct();
+  }, []);
+
+  useEffect(() => {
+    setSelectedColor(product?.colors?.[0]);
+    setSelectedSize(product?.sizes?.[0]);
   }, [product]);
 
   const onAddToCart = () => {
@@ -31,7 +44,7 @@ function ProductView({ id,store: { useStore } }) {
     console.log("Buy now", product);
   };
 
-  if (!product || !relatedProducts) {
+  if (!product) {
     return <div>Loading...</div>;
   }
 
@@ -66,7 +79,6 @@ function ProductView({ id,store: { useStore } }) {
               variants={product.colors}
               value={selectedColor}
               onChange={(color) => {
-                console.log("color", color);
                 setSelectedColor(color);
               }}
               renderVariant={(variant, selected) => (
@@ -113,7 +125,7 @@ function ProductView({ id,store: { useStore } }) {
           <div className="text-base pt-2 pb-2.5">Sản phẩm khác</div>
           <HorizontalDivider />
         </div>
-        <RelatedProducts currentProductId={product.id} useStore={useStore} />
+        <RelatedProducts currentProductId={product.id} relatedProducts={relatedProducts} />
       </WrapperScroll>
 
       <HorizontalDivider />

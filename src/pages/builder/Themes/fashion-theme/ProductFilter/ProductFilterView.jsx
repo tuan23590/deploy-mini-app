@@ -1,13 +1,24 @@
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Select from "@/pages/builder/Themes/fashion-theme/components/Select";
 import styled from "styled-components";
 import HorizontalDivider from "@/pages/builder/Themes/fashion-theme/components/HorizontalDivider";
+import { getColorOptions, getSizeOptions } from "@/pages/builder/Themes/fashion-theme/utils/api";
 
 function ProductFilterView({ store: { useStore } }) {
-  const [initSizes, _] = useStore.initSizes();
-  const [size, setSize] = useStore.size();
-  const [initColors, __] = useStore.initColors();
-  const [color, setColor] = useStore.color();
+  const [initSizes, setInitSizes] = useState([]);
+  const [size, setSize] = useState("");
+  const [initColors, setInitColors] = useState([]);
+  const [color, setColor] = useState("");
+
+  useEffect(() => {
+    const fetchSizesAndColors = async () => {
+      const sizes = await getSizeOptions();
+      setInitSizes(sizes);
+      const colors = await getColorOptions();
+      setInitColors(colors);
+    };
+    fetchSizesAndColors();
+  } ,[]);
 
   return (
     <>

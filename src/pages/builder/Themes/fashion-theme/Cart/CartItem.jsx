@@ -9,9 +9,13 @@ import { produce } from "immer";
 
 const SWIPE_TO_DELTE_OFFSET = 80;
 
-export default function CartItem({ item, useStore }) {
+export default function CartItem({
+  item,
+  setCart,
+  selectedItemIds,
+  setSelectedItemIds,
+}) {
   const [quantity, setQuantity] = useState(item.quantity);
-  const [cart, setCart] = useStore.cart();
   const addToCart = (quantity) => {
     if (quantity === 0) {
       setCart(
@@ -32,8 +36,6 @@ export default function CartItem({ item, useStore }) {
       );
     }
   };
-
-  const [selectedItemIds, setSelectedItemIds] = useStore.selectedItemIds();
 
   const displayOptions = useMemo(
     () =>

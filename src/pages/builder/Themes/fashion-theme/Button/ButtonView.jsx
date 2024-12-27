@@ -1,7 +1,14 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 
 function ButtonView({ store: { useStore } }) {
-  const [storeLocal] = useStore();
+  const [storeLocal,setStoreLocal] = useStore();
+
+  useEffect(() => {
+    setStoreLocal({
+      btn: "Button has edited",
+    });
+  }, []);
 
   return (
     <ButtonViewRender>
