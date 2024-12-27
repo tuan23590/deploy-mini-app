@@ -43,11 +43,7 @@ const NAV_ITEMS = [
   },
 ];
 
-<<<<<<< HEAD
 function FooterView({ store: { useStore } }) {
-=======
-function FooterView({store: { useStore } }) {
->>>>>>> 201c99dcb50c989f4a7a096735206708994275d7
   const [storeLocal] = useStore();
 
   return (
